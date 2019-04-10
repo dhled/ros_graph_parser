@@ -1,0 +1,42 @@
+# default .gitignore file for ipa320 repositories
+
+build/
+bin/
+lib/
+
+# generated docs
+*.dox
+*.wikidoc
+
+# eclipse
+.project
+.cproject
+
+# qcreator
+qtcreator-*
+*.user
+
+# Emacs
+.#*
+
+# VI/VIM
+*.swp
+
+# python files
+*.pcd
+*.pyc
+*.pco
+
+# temporary files
+*~
+
+# merge conflict files
+*.orig
+*BACKUP*
+*BASE*
+*LOCAL*
+*REMOTE*
+
+# Catkin custom files
+CATKIN_IGNORE
+
