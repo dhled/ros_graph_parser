@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ros_graph_parser</name>
+  <version>0.0.1</version>
+  <description>parser of ros graph</description>
+
+  <maintainer email="led@ipa.fraunhofer.de">LED</maintainer>
+
+  <license>Apache 2.0</license>
+
+  <author email="led@ipa.fraunhofer.de">LED</author>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>rosgraph</exec_depend>
+  <exec_depend>rosservice</exec_depend>
+  <exec_depend>python-yaml</exec_depend>
+
+  <export>
+
+  </export>
+</package>

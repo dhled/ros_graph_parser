@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+import ros_graph_parser.snapshot as rg
+
+if __name__ == "__main__":
+    snapshot = rg.create_ros_graph_snapshot()
+    rg.dump_print(snapshot)

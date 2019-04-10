@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import ros_graph_parser.snapshot as rg
+import rospkg
+import argparse
+import os
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Save the parsed ROS graph into '.yml' file in the package result folder. ")
+    parser.add_argument('ros_model_file', metavar='ros_model', type=str, default='ros_model.ros', help="name of the file to save the ROS Model")
+    parser.add_argument('ros_system_file', metavar='system_model', type=str, default='system_model.rossystem', help="name of the file to save the ROS System")
+    parser.add_argument('system_name', metavar='system_name', type=str, default='mysystem', help="name of the system")
+    parser.add_argument('package_name', metavar='package_name', type=str, default='my_pkg', help="name of the package")
+    args = parser.parse_args()
+    path = rospkg.RosPack().get_path('ros_graph_parser')
+    rm_file = os.path.join(path+"/result",args.ros_model_file)
+    sm_file = os.path.join(path+"/result",args.ros_system_file)
+    snapshot = rg.create_ros_graph_snapshot()
+    rg.dump_java_ros_model(snapshot, rm_file, args.package_name)
+    rg.dump_java_system_model(snapshot, args.system_name, sm_file, args.package_name)
