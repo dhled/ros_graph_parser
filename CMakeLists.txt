@@ -2,41 +2,33 @@ cmake_minimum_required(VERSION 2.8.3)
 project(ros_graph_parser)
 
 find_package(catkin REQUIRED COMPONENTS
+    message_generation
 )
 
 catkin_python_setup()
 
-# add_service_files(
-#   FILES
-#   TestService.srv
-# )
+add_service_files(
+   FILES
+   Scan.srv
+)
 
-# add_action_files(DIRECTORY action  
-# 	FILES 
-# 	TestAction.action
-# )
+generate_messages()
 
-# generate_messages(
-#   DEPENDENCIES
-#   actionlib_msgs
-#   std_msgs
-# )
+catkin_package(
+   CATKIN_DEPENDS message_runtime
+)
 
+install(DIRECTORY launch
+   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
-# catkin_package(
-#   CATKIN_DEPENDS actionlib actionlib_msgs message_runtime rospy std_msgs
-# )
+catkin_install_python(PROGRAMS scripts/ros_node
+                                scripts/print_snapshot
+                                scripts/java_snapshot
+                                scripts/yaml_snapshot
 
-# install(DIRECTORY resources launch
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
-
-# catkin_install_python(PROGRAMS scripts/nodes/actionrelay_node
-#                                scripts/nodes/servicerelay_node
-#                                scripts/nodes/topicrelay_node
-
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 # if(CATKIN_ENABLE_TESTING)
 #   find_package(rostest REQUIRED)
