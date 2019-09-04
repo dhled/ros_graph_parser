@@ -12,53 +12,53 @@ PackageSet { package {
       node Node { name /gazebo
 
         publisher {
+          Publisher { name '/iiwa/PositionJointInterface_trajectory_controller/state' message 'control_msgs.JointTrajectoryControllerState'},
           Publisher { name '/gazebo/model_states' message 'gazebo_msgs.ModelStates'},
+          Publisher { name '/gazebo/parameter_updates' message 'dynamic_reconfigure.Config'},
           Publisher { name '/iiwa/joint_states' message 'sensor_msgs.JointState'},
           Publisher { name '/iiwa/state/CartesianWrench' message 'geometry_msgs.WrenchStamped'},
-          Publisher { name '/gazebo/parameter_updates' message 'dynamic_reconfigure.Config'},
           Publisher { name '/gazebo/link_states' message 'gazebo_msgs.LinkStates'},
-          Publisher { name '/gazebo/parameter_descriptions' message 'dynamic_reconfigure.ConfigDescription'},
-          Publisher { name '/iiwa/PositionJointInterface_trajectory_controller/state' message 'control_msgs.JointTrajectoryControllerState'}}
+          Publisher { name '/gazebo/parameter_descriptions' message 'dynamic_reconfigure.ConfigDescription'}}
         subscriber {
           Subscriber { name '/iiwa/PositionJointInterface_trajectory_controller/command' message 'trajectory_msgs.JointTrajectory'},
-          Subscriber { name '/gazebo/set_link_state' message 'gazebo_msgs.LinkState'},
-          Subscriber { name '/gazebo/set_model_state' message 'gazebo_msgs.ModelState'}}
+          Subscriber { name '/gazebo/set_model_state' message 'gazebo_msgs.ModelState'},
+          Subscriber { name '/gazebo/set_link_state' message 'gazebo_msgs.LinkState'}}
         serviceserver {
+          ServiceServer { name '/gazebo/get_model_properties' service 'gazebo_msgs.GetModelProperties'},
+          ServiceServer { name '/gazebo/set_model_configuration' service 'gazebo_msgs.SetModelConfiguration'},
           ServiceServer { name '/gazebo/set_light_properties' service 'gazebo_msgs.SetLightProperties'},
           ServiceServer { name '/gazebo/get_world_properties' service 'gazebo_msgs.GetWorldProperties'},
           ServiceServer { name '/iiwa/controller_manager/list_controllers' service 'controller_manager_msgs.ListControllers'},
-          ServiceServer { name '/gazebo/get_joint_properties' service 'gazebo_msgs.GetJointProperties'},
           ServiceServer { name '/gazebo/delete_light' service 'gazebo_msgs.DeleteLight'},
+          ServiceServer { name '/gazebo/clear_joint_forces' service 'gazebo_msgs.JointRequest'},
           ServiceServer { name '/gazebo/pause_physics' service 'std_srvs.Empty'},
-          ServiceServer { name '/gazebo/delete_model' service 'gazebo_msgs.DeleteModel'},
           ServiceServer { name '/iiwa/controller_manager/unload_controller' service 'controller_manager_msgs.UnloadController'},
           ServiceServer { name '/gazebo/spawn_sdf_model' service 'gazebo_msgs.SpawnModel'},
+          ServiceServer { name '/gazebo/get_joint_properties' service 'gazebo_msgs.GetJointProperties'},
           ServiceServer { name '/gazebo/set_model_state' service 'gazebo_msgs.SetModelState'},
           ServiceServer { name '/gazebo/unpause_physics' service 'std_srvs.Empty'},
+          ServiceServer { name '/gazebo/delete_model' service 'gazebo_msgs.DeleteModel'},
           ServiceServer { name '/gazebo/get_light_properties' service 'gazebo_msgs.GetLightProperties'},
+          ServiceServer { name '/gazebo/get_link_properties' service 'gazebo_msgs.GetLinkProperties'},
           ServiceServer { name '/gazebo/clear_body_wrenches' service 'gazebo_msgs.BodyRequest'},
-          ServiceServer { name '/gazebo/get_model_state' service 'gazebo_msgs.GetModelState'},
           ServiceServer { name '/gazebo/set_parameters' service 'dynamic_reconfigure.Reconfigure'},
           ServiceServer { name '/gazebo/set_physics_properties' service 'gazebo_msgs.SetPhysicsProperties'},
           ServiceServer { name '/gazebo/apply_joint_effort' service 'gazebo_msgs.ApplyJointEffort'},
-          ServiceServer { name '/iiwa/PositionJointInterface_trajectory_controller/query_state' service 'control_msgs.QueryTrajectoryState'},
           ServiceServer { name '/iiwa/controller_manager/reload_controller_libraries' service 'controller_manager_msgs.ReloadControllerLibraries'},
+          ServiceServer { name '/gazebo/get_model_state' service 'gazebo_msgs.GetModelState'},
           ServiceServer { name '/iiwa/controller_manager/switch_controller' service 'controller_manager_msgs.SwitchController'},
           ServiceServer { name '/gazebo/get_physics_properties' service 'gazebo_msgs.GetPhysicsProperties'},
           ServiceServer { name '/gazebo/reset_simulation' service 'std_srvs.Empty'},
-          ServiceServer { name '/gazebo/get_link_state' service 'gazebo_msgs.GetLinkState'},
-          ServiceServer { name '/gazebo/get_link_properties' service 'gazebo_msgs.GetLinkProperties'},
           ServiceServer { name '/iiwa/controller_manager/load_controller' service 'controller_manager_msgs.LoadController'},
+          ServiceServer { name '/iiwa/PositionJointInterface_trajectory_controller/query_state' service 'control_msgs.QueryTrajectoryState'},
           ServiceServer { name '/gazebo/spawn_urdf_model' service 'gazebo_msgs.SpawnModel'},
-          ServiceServer { name '/gazebo/set_link_properties' service 'gazebo_msgs.SetLinkProperties'},
           ServiceServer { name '/gazebo/set_link_state' service 'gazebo_msgs.SetLinkState'},
           ServiceServer { name '/gazebo/set_joint_properties' service 'gazebo_msgs.SetJointProperties'},
+          ServiceServer { name '/gazebo/get_link_state' service 'gazebo_msgs.GetLinkState'},
           ServiceServer { name '/iiwa/controller_manager/list_controller_types' service 'controller_manager_msgs.ListControllerTypes'},
-          ServiceServer { name '/gazebo/get_model_properties' service 'gazebo_msgs.GetModelProperties'},
+          ServiceServer { name '/gazebo/set_link_properties' service 'gazebo_msgs.SetLinkProperties'},
           ServiceServer { name '/gazebo/apply_body_wrench' service 'gazebo_msgs.ApplyBodyWrench'},
-          ServiceServer { name '/gazebo/reset_world' service 'std_srvs.Empty'},
-          ServiceServer { name '/gazebo/set_model_configuration' service 'gazebo_msgs.SetModelConfiguration'},
-          ServiceServer { name '/gazebo/clear_joint_forces' service 'gazebo_msgs.JointRequest'}}
+          ServiceServer { name '/gazebo/reset_world' service 'std_srvs.Empty'}}
         actionserver {
           ActionServer { name '/iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/' action 'control_msgs.FollowJointTrajectory'}}}
 }}}

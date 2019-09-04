@@ -21,7 +21,7 @@ class Interface(object):
         self.itype = itype
 
     def __eq__(self, other):
-        if self.itype == other.itype and self.name == other.name:
+        if self.itype == other.itype and self.resolved == other.resolved:
             return True
         else:
             return False
@@ -78,13 +78,13 @@ class InterfaceSet(set):
         str_+="}"
         return str_
 
-    def java_format_system_model(self, indent="", name_type="", node_name="", pkg_name=""):
+    def java_format_system_model(self, indent="", name_type="", name_type2="", node_name="", pkg_name=""):
         if len(self) == 0:
             return ""
         str_ = ("%sRos%s {\n")%(indent, name_type)
         for elem in self:
             str_ += ("%s    Ros%s '%s' {Ref%s '%s.%s.%s.%s'},\n")%(
-                indent, name_type, elem.resolved, name_type, pkg_name, node_name, node_name, elem.resolved)
+                indent, name_type, elem.resolved, name_type2, pkg_name, node_name, node_name, elem.resolved)
         str_ = str_[:-2]
         str_+="}\n"
         return str_
@@ -187,11 +187,11 @@ class Node(object):
 
     def dump_java_system_model(self, package=""):
         system_model_str="        ComponentInterface { name '"+self.name+"'\n"
-        system_model_str+=self.publishers.java_format_system_model("            ", "Publisher", self.name, package)
-        system_model_str+=self.subscribers.java_format_system_model("            ", "Subscriber", self.name, package)
-        system_model_str+=self.services.java_format_system_model("            ", "ServiceServer", self.name, package)
-        system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServer", self.name, package)
-        system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClient", self.name, package)
+        system_model_str+=self.publishers.java_format_system_model("            ", "Publishers", "Publisher", self.name, package)
+        system_model_str+=self.subscribers.java_format_system_model("            ", "Subscribers", "Subscriber",self.name, package)
+        system_model_str+=self.services.java_format_system_model("            ", "SrvServers", "Server", self.name, package)
+        system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServers", "Server", self.name, package)
+        system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClients", "Client", self.name, package)
         system_model_str+="},\n"
         return system_model_str
 
