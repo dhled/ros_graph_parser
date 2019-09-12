@@ -9,7 +9,7 @@ This create a snapshot in a yaml format then finish.
 rosrun ros_graph_parser yaml_snaphot -f *file_name.yaml*
 
 Parameter:
-* *file_name.yaml*: the name of the file. It will be saved in the resource folder of the ros_graph_parser package (ensure that you have the permission).
+* *file_name.yaml*: the name of the file. It will be saved in the "result" folder of the ros_graph_parser package (ensure that you have the permission).
 
 ### ROS Node
 This is meant to be runned continually. This node provides a service to be used to acquire a YAML dumped format scan of the ROS Graph
@@ -27,4 +27,4 @@ rosrun ros_graph_parser java_snapshot  *ros_model_file* *ros_system_file* *syste
 * *system_name*: name of the system (check ros_model syntax)
 * *package_name*" name of the package (check ros_model syntax)
 
-All the files will be saved in the resources folder of the ros_graph_parser.
+All the files will be saved in the "result" folder of the ros_graph_parser.
