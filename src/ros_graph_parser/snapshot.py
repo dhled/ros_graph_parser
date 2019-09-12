@@ -94,8 +94,8 @@ def dump_java_ros_model(snapshot, ros_model_file, pkg_name):
     ros_model_str+="artifact {\n"
     for node in snapshot:
         ros_model_str+=node.dump_java_ros_model()
-    ros_model_str = ros_model_str[:-3]
-    ros_model_str+="\n}}}"
+    ros_model_str = ros_model_str[:-2]
+    ros_model_str+="\n}}}}"
     with open(ros_model_file, 'w') as outfile:
         outfile.write(ros_model_str)
 
