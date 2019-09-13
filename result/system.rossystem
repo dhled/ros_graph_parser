@@ -2,17 +2,12 @@ RosSystem { Name 'mysystem'
     RosComponents ( 
         ComponentInterface { name '/iiwa/robot_state_publisher'
             RosSubscribers {
-<<<<<<< 9a784935e345e3598d7bc93ea6a347ac6ffc084a
                 RosSubscriber '/iiwa/joint_states' {RefSubscriber 'mypackage./iiwa/robot_state_publisher./iiwa/robot_state_publisher./iiwa/joint_states'}}
-=======
-                RosSubscribers '/iiwa/joint_states' {RefSubscriber 'mypackage./iiwa/robot_state_publisher./iiwa/robot_state_publisher./iiwa/joint_states'}}
->>>>>>> fixing java syntax
 },
         ComponentInterface { name '/iiwa/controller_spawner'
 },
         ComponentInterface { name '/gazebo'
             RosPublishers {
-<<<<<<< 9a784935e345e3598d7bc93ea6a347ac6ffc084a
                 RosPublisher '/gazebo/model_states' {RefPublisher 'mypackage./gazebo./gazebo./gazebo/model_states'},
                 RosPublisher '/iiwa/joint_states' {RefPublisher 'mypackage./gazebo./gazebo./iiwa/joint_states'},
                 RosPublisher '/iiwa/state/CartesianWrench' {RefPublisher 'mypackage./gazebo./gazebo./iiwa/state/CartesianWrench'},
@@ -62,56 +57,5 @@ RosSystem { Name 'mysystem'
                 RosServiceServer '/gazebo/clear_joint_forces' {RefServer 'mypackage./gazebo./gazebo./gazebo/clear_joint_forces'}}
             RosActionServers {
                 RosActionServer '/iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/' {RefServer 'mypackage./gazebo./gazebo./iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/'}}
-=======
-                RosPublishers '/iiwa/PositionJointInterface_trajectory_controller/state' {RefPublisher 'mypackage./gazebo./gazebo./iiwa/PositionJointInterface_trajectory_controller/state'},
-                RosPublishers '/gazebo/model_states' {RefPublisher 'mypackage./gazebo./gazebo./gazebo/model_states'},
-                RosPublishers '/gazebo/parameter_updates' {RefPublisher 'mypackage./gazebo./gazebo./gazebo/parameter_updates'},
-                RosPublishers '/iiwa/joint_states' {RefPublisher 'mypackage./gazebo./gazebo./iiwa/joint_states'},
-                RosPublishers '/iiwa/state/CartesianWrench' {RefPublisher 'mypackage./gazebo./gazebo./iiwa/state/CartesianWrench'},
-                RosPublishers '/gazebo/link_states' {RefPublisher 'mypackage./gazebo./gazebo./gazebo/link_states'},
-                RosPublishers '/gazebo/parameter_descriptions' {RefPublisher 'mypackage./gazebo./gazebo./gazebo/parameter_descriptions'}}
-            RosSubscribers {
-                RosSubscribers '/iiwa/PositionJointInterface_trajectory_controller/command' {RefSubscriber 'mypackage./gazebo./gazebo./iiwa/PositionJointInterface_trajectory_controller/command'},
-                RosSubscribers '/gazebo/set_model_state' {RefSubscriber 'mypackage./gazebo./gazebo./gazebo/set_model_state'},
-                RosSubscribers '/gazebo/set_link_state' {RefSubscriber 'mypackage./gazebo./gazebo./gazebo/set_link_state'}}
-            RosSrvServers {
-                RosSrvServers '/gazebo/get_model_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_model_properties'},
-                RosSrvServers '/gazebo/set_model_configuration' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_model_configuration'},
-                RosSrvServers '/gazebo/set_light_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_light_properties'},
-                RosSrvServers '/gazebo/get_world_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_world_properties'},
-                RosSrvServers '/iiwa/controller_manager/list_controllers' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/list_controllers'},
-                RosSrvServers '/gazebo/delete_light' {RefServer 'mypackage./gazebo./gazebo./gazebo/delete_light'},
-                RosSrvServers '/gazebo/clear_joint_forces' {RefServer 'mypackage./gazebo./gazebo./gazebo/clear_joint_forces'},
-                RosSrvServers '/gazebo/pause_physics' {RefServer 'mypackage./gazebo./gazebo./gazebo/pause_physics'},
-                RosSrvServers '/iiwa/controller_manager/unload_controller' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/unload_controller'},
-                RosSrvServers '/gazebo/spawn_sdf_model' {RefServer 'mypackage./gazebo./gazebo./gazebo/spawn_sdf_model'},
-                RosSrvServers '/gazebo/get_joint_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_joint_properties'},
-                RosSrvServers '/gazebo/set_model_state' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_model_state'},
-                RosSrvServers '/gazebo/unpause_physics' {RefServer 'mypackage./gazebo./gazebo./gazebo/unpause_physics'},
-                RosSrvServers '/gazebo/delete_model' {RefServer 'mypackage./gazebo./gazebo./gazebo/delete_model'},
-                RosSrvServers '/gazebo/get_light_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_light_properties'},
-                RosSrvServers '/gazebo/get_link_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_link_properties'},
-                RosSrvServers '/gazebo/clear_body_wrenches' {RefServer 'mypackage./gazebo./gazebo./gazebo/clear_body_wrenches'},
-                RosSrvServers '/gazebo/set_parameters' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_parameters'},
-                RosSrvServers '/gazebo/set_physics_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_physics_properties'},
-                RosSrvServers '/gazebo/apply_joint_effort' {RefServer 'mypackage./gazebo./gazebo./gazebo/apply_joint_effort'},
-                RosSrvServers '/iiwa/controller_manager/reload_controller_libraries' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/reload_controller_libraries'},
-                RosSrvServers '/gazebo/get_model_state' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_model_state'},
-                RosSrvServers '/iiwa/controller_manager/switch_controller' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/switch_controller'},
-                RosSrvServers '/gazebo/get_physics_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_physics_properties'},
-                RosSrvServers '/gazebo/reset_simulation' {RefServer 'mypackage./gazebo./gazebo./gazebo/reset_simulation'},
-                RosSrvServers '/iiwa/controller_manager/load_controller' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/load_controller'},
-                RosSrvServers '/iiwa/PositionJointInterface_trajectory_controller/query_state' {RefServer 'mypackage./gazebo./gazebo./iiwa/PositionJointInterface_trajectory_controller/query_state'},
-                RosSrvServers '/gazebo/spawn_urdf_model' {RefServer 'mypackage./gazebo./gazebo./gazebo/spawn_urdf_model'},
-                RosSrvServers '/gazebo/set_link_state' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_link_state'},
-                RosSrvServers '/gazebo/set_joint_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_joint_properties'},
-                RosSrvServers '/gazebo/get_link_state' {RefServer 'mypackage./gazebo./gazebo./gazebo/get_link_state'},
-                RosSrvServers '/iiwa/controller_manager/list_controller_types' {RefServer 'mypackage./gazebo./gazebo./iiwa/controller_manager/list_controller_types'},
-                RosSrvServers '/gazebo/set_link_properties' {RefServer 'mypackage./gazebo./gazebo./gazebo/set_link_properties'},
-                RosSrvServers '/gazebo/apply_body_wrench' {RefServer 'mypackage./gazebo./gazebo./gazebo/apply_body_wrench'},
-                RosSrvServers '/gazebo/reset_world' {RefServer 'mypackage./gazebo./gazebo./gazebo/reset_world'}}
-            RosActionServers {
-                RosActionServers '/iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/' {RefServer 'mypackage./gazebo./gazebo./iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/'}}
->>>>>>> fixing java syntax
 }
 )}

@@ -10,20 +10,8 @@ PackageSet { package {
 }},
     Artifact /gazebo {
       node Node { name /gazebo
-
-        publisher {
-          Publisher { name '/iiwa/PositionJointInterface_trajectory_controller/state' message 'control_msgs.JointTrajectoryControllerState'},
-          Publisher { name '/gazebo/model_states' message 'gazebo_msgs.ModelStates'},
-          Publisher { name '/gazebo/parameter_updates' message 'dynamic_reconfigure.Config'},
-          Publisher { name '/iiwa/joint_states' message 'sensor_msgs.JointState'},
-          Publisher { name '/iiwa/state/CartesianWrench' message 'geometry_msgs.WrenchStamped'},
-          Publisher { name '/gazebo/link_states' message 'gazebo_msgs.LinkStates'},
-          Publisher { name '/gazebo/parameter_descriptions' message 'dynamic_reconfigure.ConfigDescription'}}
-        subscriber {
-          Subscriber { name '/iiwa/PositionJointInterface_trajectory_controller/command' message 'trajectory_msgs.JointTrajectory'},
-          Subscriber { name '/gazebo/set_model_state' message 'gazebo_msgs.ModelState'},
-          Subscriber { name '/gazebo/set_link_state' message 'gazebo_msgs.LinkState'}}
-        serviceserver {
+				
+	serviceserver {
           ServiceServer { name '/gazebo/get_model_properties' service 'gazebo_msgs.GetModelProperties'},
           ServiceServer { name '/gazebo/set_model_configuration' service 'gazebo_msgs.SetModelConfiguration'},
           ServiceServer { name '/gazebo/set_light_properties' service 'gazebo_msgs.SetLightProperties'},
@@ -59,6 +47,18 @@ PackageSet { package {
           ServiceServer { name '/gazebo/set_link_properties' service 'gazebo_msgs.SetLinkProperties'},
           ServiceServer { name '/gazebo/apply_body_wrench' service 'gazebo_msgs.ApplyBodyWrench'},
           ServiceServer { name '/gazebo/reset_world' service 'std_srvs.Empty'}}
+        publisher {
+          Publisher { name '/iiwa/PositionJointInterface_trajectory_controller/state' message 'control_msgs.JointTrajectoryControllerState'},
+          Publisher { name '/gazebo/model_states' message 'gazebo_msgs.ModelStates'},
+          Publisher { name '/gazebo/parameter_updates' message 'dynamic_reconfigure.Config'},
+          Publisher { name '/iiwa/joint_states' message 'sensor_msgs.JointState'},
+          Publisher { name '/iiwa/state/CartesianWrench' message 'geometry_msgs.WrenchStamped'},
+          Publisher { name '/gazebo/link_states' message 'gazebo_msgs.LinkStates'},
+          Publisher { name '/gazebo/parameter_descriptions' message 'dynamic_reconfigure.ConfigDescription'}}
+        subscriber {
+          Subscriber { name '/iiwa/PositionJointInterface_trajectory_controller/command' message 'trajectory_msgs.JointTrajectory'},
+          Subscriber { name '/gazebo/set_model_state' message 'gazebo_msgs.ModelState'},
+          Subscriber { name '/gazebo/set_link_state' message 'gazebo_msgs.LinkState'}}
         actionserver {
           ActionServer { name '/iiwa/PositionJointInterface_trajectory_controller/follow_joint_trajectory/' action 'control_msgs.FollowJointTrajectory'}}}
-}}}
+}}}}}

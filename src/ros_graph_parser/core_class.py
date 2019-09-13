@@ -78,13 +78,15 @@ class InterfaceSet(set):
         str_+="}"
         return str_
 
-    def java_format_system_model(self, indent="", name_type="", name_type2="", node_name="", pkg_name=""):
+    def java_format_system_model(self, indent="", name_type="", name_type2="", node_name="", pkg_name="", name_type3=""):
         if len(self) == 0:
             return ""
+        if not name_type3:
+            name_type3 = name_type2
         str_ = ("%sRos%s {\n")%(indent, name_type)
         for elem in self:
             str_ += ("%s    Ros%s '%s' {Ref%s '%s.%s.%s.%s'},\n")%(
-                indent, name_type, elem.resolved, name_type2, pkg_name, node_name, node_name, elem.resolved)
+                indent, name_type3, elem.resolved, name_type2, pkg_name, node_name, node_name, elem.resolved)
         str_ = str_[:-2]
         str_+="}\n"
         return str_
@@ -177,9 +179,9 @@ class Node(object):
     def dump_java_ros_model(self):
         ros_model_str="    Artifact "+self.name+" {\n"
         ros_model_str+="      node Node { name "+ self.name+"\n"
-        ros_model_str+=self.publishers.java_format_ros_model("        ", "Publisher", "message","publisher")
-        ros_model_str+=self.subscribers.java_format_ros_model("        ", "Subscriber", "message", "subscriber")
         ros_model_str+=self.services.java_format_ros_model("        ", "ServiceServer", "service","serviceserver")
+        ros_model_str+=self.publishers.java_format_ros_model("        ", "Publisher", "message","publisher")
+        ros_model_str+=self.subscribers.java_format_ros_model("        ", "Subscriber", "message", "subscriber")       
         ros_model_str+=self.action_servers.java_format_ros_model("        ", "ActionServer", "action","actionserver")
         ros_model_str+=self.action_clients.java_format_ros_model("        ", "ActionClient", "action","actionclient")
         ros_model_str+="}},\n"
@@ -189,7 +191,7 @@ class Node(object):
         system_model_str="        ComponentInterface { name '"+self.name+"'\n"
         system_model_str+=self.publishers.java_format_system_model("            ", "Publishers", "Publisher", self.name, package)
         system_model_str+=self.subscribers.java_format_system_model("            ", "Subscribers", "Subscriber",self.name, package)
-        system_model_str+=self.services.java_format_system_model("            ", "SrvServers", "Server", self.name, package)
+        system_model_str+=self.services.java_format_system_model("            ", "SrvServers", "Server", self.name, package, "ServiceServer")
         system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServers", "Server", self.name, package)
         system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClients", "Client", self.name, package)
         system_model_str+="},\n"
