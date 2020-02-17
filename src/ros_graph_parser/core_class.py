@@ -112,6 +112,7 @@ class Node(object):
         self.publishers = InterfaceSet()
         self.subscribers = InterfaceSet()
         self.services = InterfaceSet()
+        self.params = InterfaceSet()
 
     def get_namespace(self):
         return get_namespace(self.name)
@@ -164,6 +165,7 @@ class Node(object):
         _str = _str +"\tServices:\n%s"%(self.services.str_format('\t\t'))
         _str = _str +"\tActionClients:\n%s"%(self.action_clients.str_format('\t\t'))
         _str = _str +"\tActionServers:\n%s"%(self.action_servers.str_format('\t\t'))
+        _str = _str +"\tParameters:\n%s"%(self.params.str_format('\t\t'))
         _str = _str + ("\n")
         print(_str)
 
@@ -174,6 +176,7 @@ class Node(object):
         yaml_dict['Services'] = self.services.get_list()
         yaml_dict['ActionClients'] = self.action_clients.get_list()
         yaml_dict['ActionServers'] = self.action_servers.get_list()
+        yaml_dict['Parameters'] = self.params.get_list()
         return yaml_dict
 
     def dump_java_ros_model(self):
@@ -184,6 +187,7 @@ class Node(object):
         ros_model_str+=self.subscribers.java_format_ros_model("        ", "Subscriber", "message", "subscriber")       
         ros_model_str+=self.action_servers.java_format_ros_model("        ", "ActionServer", "action","actionserver")
         ros_model_str+=self.action_clients.java_format_ros_model("        ", "ActionClient", "action","actionclient")
+        ros_model_str+=self.params.java_format_ros_model("        ", "Parameters", "type","param")
         ros_model_str+="}},\n"
         return ros_model_str
 
@@ -194,6 +198,7 @@ class Node(object):
         system_model_str+=self.services.java_format_system_model("            ", "SrvServers", "Server", self.name, package, "ServiceServer")
         system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServers", "Server", self.name, package)
         system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClients", "Client", self.name, package)
+        system_model_str+=self.params.java_format_system_model("            ", "Parameters", "Param", self.name, package)
         system_model_str+="},\n"
         return system_model_str
 
