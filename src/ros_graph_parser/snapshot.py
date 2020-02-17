@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import rosgraph
+import rosparam
 import rosservice
 import ros_graph_parser.core_class as rg
 import yaml
@@ -25,6 +26,7 @@ def create_ros_graph_snapshot():
     params = list()
     services_dict = dict()
     topics_dict = dict()
+    parameter_dict = dict()
 
     if not(master.is_online()):
         print("Error: ROSMaster not found")
@@ -44,6 +46,7 @@ def create_ros_graph_snapshot():
     #get all service types
     for service_name, _ in services:
         services_dict[service_name] = rosservice.get_service_type(service_name) 
+
 
     # Get all nodes
     for s in state:
@@ -74,6 +77,11 @@ def create_ros_graph_snapshot():
         node.check_actions()
         nodes.append(node)
     
+    node_param = rg.Node("parameters_node")
+    for param_name in params:
+        node_param.params.add(rg.ParameterInterface(param_name,master.getParam(param_name),type(master.getParam(param_name))))
+    nodes.append(node_param)
+
     return nodes
     
 def dump_print(snapshot):
