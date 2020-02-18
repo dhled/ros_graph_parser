@@ -47,10 +47,6 @@ def create_ros_graph_snapshot():
     for service_name, _ in services:
         services_dict[service_name] = rosservice.get_service_type(service_name) 
 
-    param_list = master.getParamNames()
-    for param_name in param_list:
-        parameter_dict[param_name]=master.getParam(param_name)
-        print(rosparam.get_param(param_name))
 
     # Get all nodes
     for s in state:
@@ -81,6 +77,11 @@ def create_ros_graph_snapshot():
         node.check_actions()
         nodes.append(node)
     
+    node_param = rg.Node("parameters_node")
+    for param_name in params:
+        node_param.params.add(rg.ParameterInterface(param_name,master.getParam(param_name),type(master.getParam(param_name))))
+    nodes.append(node_param)
+
     return nodes
     
 def dump_print(snapshot):
