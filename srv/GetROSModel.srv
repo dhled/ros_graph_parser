@@ -1,5 +1,5 @@
-    #Empty Trigger
+#Empty Trigger
 ---
 bool success        # indicate successful run of triggered service
 string message      # informational, e.g. for error messages
-string rosgraph     # yaml format of rosgraph (pickled)
+string model        # yaml format of rosgraph (pickled)
