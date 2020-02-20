@@ -9,7 +9,8 @@ catkin_python_setup()
 
 add_service_files(
    FILES
-   Scan.srv
+   GetROSModel.srv
+   GetROSSystemModel.srv
 )
 
 generate_messages()

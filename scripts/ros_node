@@ -8,23 +8,21 @@ import rospy
 class RosGraphNode():
 
     def __init__(self):
-        rospy.Service('scan_ros_graph', rg_srv.Scan, self.create_snapshot)
-    
-    def create_snapshot(self, request):
-        answer = rg_srv.ScanResponse()
-        answer.success, answer.message, answer.rosgraph = self._create_snapshot()
+        rospy.Service('get_ros_model', rg_srv.GetROSModel,
+                      self.get_ros_model)
+
+        rospy.Service('get_rossystem_model', rg_srv.GetROSSystemModel,
+                      self.get_rossystem_model)
+
+    def get_ros_model(self, request):
+        answer = rg_srv.GetROSModelResponse()
+        answer.success, answer.message, answer.model = rg.create_java_ros_model()
         return answer
 
-    def _create_snapshot(self):
-        try:
-            snapshot = rg.create_ros_graph_snapshot()
-            dump = dict()
-            dump['nodes']=dict()
-            for node in snapshot:
-                dump['nodes'][node.name] = node.dump_yaml()
-            return True, "Scanning Succeeded", str(dump)
-        except:
-            return False, "Scanning Failed", ""
+    def get_rossystem_model(self, request):
+        answer = rg_srv.GetROSSystemModelResponse()
+        answer.success, answer.message, answer.model = rg.create_java_system_model()
+        return answer
 
 
 if __name__ == "__main__":
