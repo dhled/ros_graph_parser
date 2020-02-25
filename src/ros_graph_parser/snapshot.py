@@ -9,7 +9,7 @@ import yaml
 BLACK_LIST_PARAM = ['/rosdistro', '/rosversion', '/run_id']
 BLACK_LIST_TOPIC = ["/tf", "/tf_static", "/rosout", "/clock"]
 BLACK_LIST_SERV = ["/set_logger_level", "/get_loggers"]
-BLACK_LIST_NODE = ["/rosout"]
+BLACK_LIST_NODE = ["/rosout","/head_cam"]
 
 ACTION_FILTER = ['cancel', 'goal', 'status', 'result', 'feedback']
 
@@ -47,7 +47,10 @@ def create_ros_graph_snapshot():
 
     # get all service types
     for service_name, _ in services:
-        services_dict[service_name] = rosservice.get_service_type(service_name)
+        try:
+            services_dict[service_name] = rosservice.get_service_type(service_name)
+        except:
+            pass
 
     # Get all nodes
     for s in state:
