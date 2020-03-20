@@ -87,7 +87,28 @@ def create_ros_graph_snapshot():
     nodes.append(node_param)
 
     return nodes
+    
+def dump_print(snapshot):
+    for node in snapshot:
+        node.dump_print()
 
+def dump_yaml(snapshot, file):
+    dump = dict()
+    dump['nodes']=dict()
+    for node in snapshot:
+        dump['nodes'][node.name] = node.dump_yaml()
+    with open(file, 'w') as outfile:
+        yaml.dump(dump, outfile, default_flow_style=False)
+
+def dump_java_ros_model(snapshot, ros_model_file, pkg_name):
+    sucess, text_msg, ros_model_str = create_java_ros_model(pkg_name)
+    with open(ros_model_file, 'w') as outfile:
+        outfile.write(ros_model_str)
+
+def dump_java_system_model(snapshot, system_name, system_model_file, pkg_name):
+    sucess, text_msg, system_model_str = create_java_system_model(system_name, pkg_name)
+    with open(system_model_file, 'w') as outfile:
+        outfile.write(system_model_str)
 
 def create_java_ros_model(pkg_name="dummy_pkg"):
     try:
@@ -101,7 +122,6 @@ def create_java_ros_model(pkg_name="dummy_pkg"):
         ros_model_str += "\n}}}}"
     except:
         return False, "Scanning Failed", ""
-
     return True, "Scanning succeeded", ros_model_str
 
 
@@ -118,3 +138,10 @@ def create_java_system_model(system_name="dummy_system", pkg_name="dummy_pkg"):
         return False, "Scanning Failed", ""
 
     return True, "Scanning succeeded", system_model_str
+
+if __name__ == "__main__":
+    snapshot = create_ros_graph_snapshot()
+    dump_print(snapshot)
+    dump_yaml(snapshot, "ros_snapshot.yml")
+    dump_java_ros_model(snapshot, "dump.ros", "dummy_package")
+    dump_java_system_model(snapshot, "mysystem", "Mysystem.rossystem", "dummy_package")
