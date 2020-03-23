@@ -147,7 +147,7 @@ class ParameterInterface(object):
         elif self.itype =="List":
            str_param_value+=str(self.value).replace("[","{").replace("]","}")
         elif self.itype == 'Struc':
-            str_param_value+=self.value_struc(self.value[0],indent+"  ")
+            str_param_value+=self.value_struc(self.value[0],indent+"  ","")
         else:
             str_param_value+=str(value)
         return str_param_value
@@ -190,7 +190,7 @@ class ParameterInterface(object):
         indent_new=""
         return str_param
 
-    def value_struc(self,struc_dict,indent):
+    def value_struc(self,struc_dict,indent,string_end):
         str_param="{\n"
         indent_new=indent+"    "
         for struc_element in struc_dict:
@@ -205,12 +205,12 @@ class ParameterInterface(object):
             if sub_type == "Boolean":
                 sub_value=str(sub_value).lower()
             if isinstance(sub_value,dict):
-                str_param += self.value_struc(struc_dict[struc_element],indent_new)
+                str_param += self.value_struc(struc_dict[struc_element],indent_new,"}}")
             else:
                 str_param += "%s}}"%(sub_value)
             str_param += ",\n"
         str_param = str_param[:-2]
-        str_param+="}"
+        str_param+="}%s"%(string_end)
         indent_new=""
         return str_param
 
