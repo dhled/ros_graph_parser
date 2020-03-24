@@ -360,8 +360,8 @@ class Node(object):
         system_model_str+=self.publishers.java_format_system_model("            ", "Publishers", "Publisher", self.name, package)
         system_model_str+=self.subscribers.java_format_system_model("            ", "Subscribers", "Subscriber",self.name, package)
         system_model_str+=self.services.java_format_system_model("            ", "SrvServers", "Server", self.name, package, "ServiceServer")
-        system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServers", "Server", self.name, package)
-        system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClients", "Client", self.name, package)
+        system_model_str+=self.action_servers.java_format_system_model("            ", "ActionServers", "Server", self.name, package, "ActionServer")
+        system_model_str+=self.action_clients.java_format_system_model("            ", "ActionClients", "Client", self.name, package, "ActionClient")
         system_model_str+=self.params.java_format_system_model("            ", "Parameters", "Parameter", self.name, package)
         system_model_str+="},\n"
         return system_model_str
