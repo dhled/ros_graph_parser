@@ -116,6 +116,7 @@ class ParameterInterface(object):
         self.minimal = name[len(self.namespace)-1:]
         self.value = value
         self.itype = self.get_type(value)
+        self.count = 0
 
     def __eq__(self, other):
         if self.value == other.value and self.resolved == other.resolved:
@@ -214,11 +215,15 @@ class ParameterInterface(object):
             if isinstance(sub_value, dict):
                 str_param += self.value_struc(
                     struc_dict[struc_element], indent_new)
+                self.count = self.count + 1
             else:
                 str_param += "%s}}" % (sub_value)
             str_param += ",\n"
         str_param = str_param[:-2]
         str_param += "}"
+        if self.count == 1:
+            str_param += "}}"
+            self.count = self.count - 1
         indent_new = ""
         return str_param
 
