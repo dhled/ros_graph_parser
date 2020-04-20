@@ -9,7 +9,7 @@ import yaml
 BLACK_LIST_PARAM = ['/rosdistro', '/rosversion', '/run_id']
 BLACK_LIST_TOPIC = ["/tf", "/tf_static", "/rosout", "/clock"]
 BLACK_LIST_SERV = ["/set_logger_level", "/get_loggers"]
-BLACK_LIST_NODE = ["/rosout", "/head_cam"]
+BLACK_LIST_NODE = ["/rosout"]
 
 ACTION_FILTER = ['cancel', 'goal', 'status', 'result', 'feedback']
 
