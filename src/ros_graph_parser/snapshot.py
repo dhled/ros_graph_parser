@@ -6,7 +6,7 @@ import rosservice
 import ros_graph_parser.core_class as rg
 import yaml
 
-BLACK_LIST_PARAM = ['/rosdistro', '/rosversion', '/run_id']
+BLACK_LIST_PARAM = ['/rosdistro', '/rosversion', '/run_id','robot_description','/docker_control/stations','/docking_laser_filter/scan_filter_chain','/bms/diagnostics','/station_detector/stations','/scan_unifier_filter/scan_filter_chain']
 BLACK_LIST_TOPIC = ["/tf", "/tf_static", "/rosout", "/clock"]
 BLACK_LIST_SERV = ["/set_logger_level", "/get_loggers"]
 BLACK_LIST_NODE = ["/rosout"]
