@@ -9,17 +9,14 @@ catkin_python_setup()
 
 add_service_files(
    FILES
-   Scan.srv
+   GetROSModel.srv
+   GetROSSystemModel.srv
 )
 
 generate_messages()
 
 catkin_package(
    CATKIN_DEPENDS message_runtime
-)
-
-install(DIRECTORY launch
-   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
 catkin_install_python(PROGRAMS scripts/ros_node
