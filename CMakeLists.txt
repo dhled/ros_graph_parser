@@ -19,10 +19,6 @@ catkin_package(
    CATKIN_DEPENDS message_runtime
 )
 
-install(DIRECTORY launch
-   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
 catkin_install_python(PROGRAMS scripts/ros_node
                                 scripts/print_snapshot
                                 scripts/java_snapshot

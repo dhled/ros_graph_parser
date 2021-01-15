@@ -290,7 +290,8 @@ class Node(object):
         self.action_servers = InterfaceSet()
         self.publishers = InterfaceSet()
         self.subscribers = InterfaceSet()
-        self.services = InterfaceSet()
+        self.service_clients = InterfaceSet()
+        self.service_servers = InterfaceSet()
         self.params = ParameterSet()
 
     def get_namespace(self):
@@ -343,7 +344,7 @@ class Node(object):
             "\tPublishers:\n%s" % (self.publishers.str_format('\t\t'))
         _str = _str + \
             "\tSubscribers:\n%s" % (self.subscribers.str_format('\t\t'))
-        _str = _str + "\tServices:\n%s" % (self.services.str_format('\t\t'))
+        _str = _str + "\tServices:\n%s" % (self.service_servers.str_format('\t\t'))
         _str = _str + \
             "\tActionClients:\n%s" % (self.action_clients.str_format('\t\t'))
         _str = _str + \
@@ -356,7 +357,7 @@ class Node(object):
         yaml_dict = dict()
         yaml_dict['Publishers'] = self.publishers.get_list()
         yaml_dict['Subscribers'] = self.subscribers.get_list()
-        yaml_dict['Services'] = self.services.get_list()
+        yaml_dict['Services'] = self.service_servers.get_list()
         yaml_dict['ActionClients'] = self.action_clients.get_list()
         yaml_dict['ActionServers'] = self.action_servers.get_list()
         yaml_dict['Parameters'] = self.params.get_list()
@@ -365,8 +366,10 @@ class Node(object):
     def dump_java_ros_model(self):
         ros_model_str = "    Artifact "+self.name+" {\n"
         ros_model_str += "      node Node { name " + self.name+"\n"
-        ros_model_str += self.services.java_format_ros_model(
+        ros_model_str += self.service_servers.java_format_ros_model(
             "        ", "ServiceServer", "service", "serviceserver")
+        ros_model_str += self.service_clients.java_format_ros_model(
+            "        ", "ServiceClients", "service", "serviceclient")
         ros_model_str += self.publishers.java_format_ros_model(
             "        ", "Publisher", "message", "publisher")
         ros_model_str += self.subscribers.java_format_ros_model(
@@ -387,7 +390,7 @@ class Node(object):
             "            ", "Publishers", "Publisher", self.name, package)
         system_model_str += self.subscribers.java_format_system_model(
             "            ", "Subscribers", "Subscriber", self.name, package)
-        system_model_str += self.services.java_format_system_model(
+        system_model_str += self.service_servers.java_format_system_model(
             "            ", "SrvServers", "Server", self.name, package, "ServiceServer")
         system_model_str += self.action_servers.java_format_system_model(
             "            ", "ActionServers", "ActionServer", self.name, package)
